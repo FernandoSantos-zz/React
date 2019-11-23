@@ -13,22 +13,18 @@ import '../css/styles.css';
 // }
 
 
-class Header extends Component { 
+const Header = (props) => { 
 
-    state = {
-        active: false,
-        keywords: 'hello'
-    }
-h
-    inputChangeHandler = (event) => {
-        const value = event.target.value === '' ? false:true;
-        this.setState({
-            active: value,
-            keywords: event.target.value
-        });
-    }
+//     state = {
+//         keywords: 'hello'
+//     }
+// h
+//     inputChangeHandler = (event) => {
+//         this.setState({
+//             keywords: event.target.value
+//         });
+//     }
 
-    render(){
         // const styles = {
         //     header:{
         //         background:'#03a9f4'
@@ -51,14 +47,13 @@ h
     //     style.background = 'red'
     // }
     return (
-        <header style={{background: `${this.state.active ? "red":"blue"}`}} >
+        <header>
             <div className="logo">Logo</div> 
             <input 
                 type="text" 
-                onChange={this.inputChangeHandler} />
+                onChange={props.keywords} />
         </header> 
     )
-}
 }
 
 export default Header;
