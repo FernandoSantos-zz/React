@@ -83,9 +83,9 @@ checkBrowsers(paths.appPath, isInteractive)
     const urls = prepareUrls(protocol, HOST, port);
     const devSocket = {
       warnings: warnings =>
-        devServer.sockWrite(devServer.sockets, 'warnings', warnings),
+        devServer.sendMessage(devServer.sockets, 'warnings', warnings),
       errors: errors =>
-        devServer.sockWrite(devServer.sockets, 'errors', errors),
+        devServer.sendMessage(devServer.sockets, 'errors', errors),
     };
     // Create a webpack compiler that is configured with custom messages.
     const compiler = createCompiler({
@@ -106,9 +106,11 @@ checkBrowsers(paths.appPath, isInteractive)
       proxyConfig,
       urls.lanUrlForConfig
     );
-    const devServer = new WebpackDevServer(compiler, serverConfig);
+    serverConfig.host = HOST;
+    serverConfig.port = port;
+    const devServer = new WebpackDevServer(serverConfig, compiler);
     // Launch WebpackDevServer.
-    devServer.listen(port, HOST, err => {
+    devServer.startCallback(err => {
       if (err) {
         return console.log(err);
       }
