@@ -1,10 +1,10 @@
 import React from 'react';
 import NewsItem from "./news_list_item";
 
-const NewList = (props) => {
+const NewsList = (props) => {
     const items = props.news.map((item) =>{
         return (
-            <NewsItem item={item.id} item={item} />
+            <NewsItem key={item.id} item={item} />
         )
     });
 
@@ -15,4 +15,4 @@ const NewList = (props) => {
         </div>
     )
 }
-export default NewList;
+export default NewsList;
